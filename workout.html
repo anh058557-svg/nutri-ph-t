@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NutriFit – Tập Luyện</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --green-100:#e8f7ef;
+  --green-200:#d5f0e2;
+  --green-400:#7ac89a;
+  --green-600:#3ea96a;
+  --green-700:#2b8653;
+
+  --text:#1f2d26;
+  --muted:#6a7c72;
+  --card:#ffffff;
+  --line:#e4ede9;
+
+  --shadow:0 4px 18px rgba(0,0,0,0.06);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:"Inter", sans-serif;
+  background:var(--green-100);
+  color:var(--text);
+}
+
+.wrap{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+
+/* HEADER ------------------------------------------------ */
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+.back{
+  font-size:24px;
+  cursor:pointer;
+}
+
+.brand{
+  text-align:center;
+  flex:1;
+}
+
+.brand h1{
+  font-size:36px;
+  font-weight:800;
+  color:var(--green-700);
+}
+
+.brand p{
+  font-size:14px;
+  color:var(--muted);
+  margin-top:-4px;
+}
+
+.icons{
+  display:flex;
+  gap:10px;
+}
+
+.ico{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  display:grid;
+  place-items:center;
+}
+
+/* SECTION TITLE ----------------------------------------- */
+.section-title{
+  font-size:26px;
+  font-weight:800;
+  color:var(--green-700);
+  margin:20px 0 10px;
+}
+
+/* SEARCH -------------------------------------------------- */
+.search{
+  position:relative;
+  margin-bottom:20px;
+}
+
+.search input{
+  width:100%;
+  padding:12px 40px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  font-size:15px;
+  background:white;
+}
+
+.search .icon{
+  position:absolute;
+  left:14px; top:10px;
+  font-size:18px;
+  color:#777;
+}
+
+.search .filter{
+  position:absolute;
+  right:14px; top:10px;
+  font-size:18px;
+  color:#777;
+}
+
+/* EXERCISE CARDS ---------------------------------------- */
+.exercises{
+  display:flex;
+  gap:18px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  padding-bottom:6px;
+}
+.exercises::-webkit-scrollbar{display:none;}
+
+.exercise{
+  flex:0 0 260px;
+  background:var(--card);
+  border-radius:16px;
+  border:1px solid var(--line);
+  padding:14px;
+  box-shadow:var(--shadow);
+}
+
+.exercise h4{
+  text-align:center;
+  font-size:17px;
+  font-weight:700;
+  margin-bottom:8px;
+  color:var(--green-700);
+}
+
+.exercise iframe{
+  width:100%;
+  height:160px;
+  border:none;
+  border-radius:12px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.1);
+  margin-bottom:8px;
+}
+
+.exercise p{
+  text-align:center;
+  font-size:14px;
+  color:var(--muted);
+  margin:2px 0;
+}
+
+/* AI BOX -------------------------------------------------- */
+.ai-box{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px;
+  margin-top:20px;
+  box-shadow:var(--shadow);
+}
+
+.ai-box h3{
+  margin-bottom:10px;
+  font-size:18px;
+  color:var(--green-700);
+}
+
+.ai-box p{
+  font-size:15px;
+  line-height:1.6;
+  color:var(--text);
+  margin-bottom:8px;
+}
+
+/* CHATBOX ------------------------------------------------ */
+.chatbox{
+  margin:30px auto 0;
+  max-width:300px;
+  padding:10px 16px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  display:flex;
+  gap:10px;
+  background:white;
+}
+
+.chatbox input{
+  flex:1;
+  border:none;
+  outline:none;
+  font-size:14px;
+}
+
+.send{
+  background:var(--green-600);
+  color:white;
+  border:none;
+  border-radius:50%;
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header class="wrap">
+  <div class="back" onclick="history.back()">←</div>
+
+  <div class="brand">
+    <h1>NutriFit</h1>
+    <p>Tập luyện hằng ngày</p>
+  </div>
+
+  <div class="icons">
+    <div class="ico">⚙️</div>
+    <div class="ico">👤</div>
+    <div class="ico">⋮</div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="section-title">02 · Tập Luyện</div>
+
+  <!-- SEARCH -->
+  <div class="search">
+    <span class="icon">🔍</span>
+    <input type="text" placeholder="Tìm bài tập...">
+    <span class="filter">⚙️</span>
+  </div>
+
+  <h3 style="margin-bottom:12px;">AI gợi ý bài tập cho bạn</h3>
+
+  <!-- WORKOUT CARDS ------------------------------------------------ -->
+  <div class="exercises">
+
+    <!-- Sáng -->
+    <div class="exercise">
+      <h4>Buổi Sáng</h4>
+      <iframe src="https://www.youtube.com/embed/WDIpL0pjun0" allowfullscreen></iframe>
+      <p>Chống đẩy + Giãn cơ</p>
+      <p>15 phút • 120 kcal</p>
+    </div>
+
+    <!-- Trưa -->
+    <div class="exercise">
+      <h4>Buổi Trưa</h4>
+      <iframe src="https://www.youtube.com/embed/HmvTI9ozGFk" allowfullscreen></iframe>
+      <p>Plank + Bụng</p>
+      <p>20 phút • 180 kcal</p>
+    </div>
+
+    <!-- Tối -->
+    <div class="exercise">
+      <h4>Buổi Tối</h4>
+      <iframe src="https://www.youtube.com/embed/6qg3r4zZE_k" allowfullscreen></iframe>
+      <p>Yoga thư giãn</p>
+      <p>25 phút • 150 kcal</p>
+    </div>
+
+  </div>
+
+  <!-- AI COMMENT ---------------------------------------------------- -->
+  <div class="ai-box">
+    <h3>Phân tích & gợi ý từ NutriFit AI</h3>
+    <p>Bạn đang trong lộ trình giảm mỡ – vì vậy AI đã thiết kế lịch tập gồm 60 phút/ngày với cường độ vừa phải.</p>
+    <p><strong>Lưu ý:</strong> Luôn khởi động 5 phút trước khi tập và giãn cơ 10 phút sau khi tập để hạn chế chấn thương.</p>
+  </div>
+
+  <!-- CHATBOX ------------------------------------------------------- -->
+  <div class="chatbox">
+    <input type="text" placeholder="Chat với AI...">
+    <button class="send">➤</button>
+  </div>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NutriFit – Tổng quan sức khoẻ</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --green-100:#e8f7ef;
+  --green-200:#d5f0e2;
+  --green-400:#7ac89a;
+  --green-600:#3ea96a;
+  --green-700:#2b8653;
+
+  --text:#1f2d26;
+  --muted:#6a7c72;
+  --card:#ffffff;
+  --line:#e4ede9;
+
+  --shadow:0 4px 18px rgba(0,0,0,0.06);
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+body{
+  font-family:"Inter", sans-serif;
+  background:var(--green-100);
+  color:var(--text);
+}
+
+/* header */
+header{
+  padding:20px 16px 10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.brand{
+  font-size:42px;
+  font-weight:800;
+  color:var(--green-700);
+  letter-spacing:-1px;
+}
+.subtitle{
+  font-size:15px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+/* main wrapper */
+.main{
+  padding:20px 16px 40px;
+  max-width:820px;
+  margin:auto;
+}
+
+/* PROGRESS RING */
+.ring-box{
+  width:260px; height:260px;
+  margin:20px auto 30px;
+  position:relative;
+}
+svg{
+  width:100%; height:100%;
+  transform:rotate(-90deg);
+}
+.track{
+  stroke:var(--green-200);
+  stroke-width:16;
+}
+.progress{
+  stroke:var(--green-600);
+  stroke-width:16;
+  stroke-linecap:round;
+  transition:stroke-dashoffset 1.5s ease;
+}
+
+/* center text */
+.center-text{
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.percent{
+  font-size:48px;
+  font-weight:800;
+  color:var(--green-700);
+}
+
+/* STATS */
+.stats{
+  display:flex;
+  justify-content:space-between;
+  margin-top:16px;
+  padding:0 20px;
+}
+.stat{
+  text-align:center;
+}
+.stat-value{
+  font-size:22px;
+  font-weight:700;
+  color:var(--green-700);
+}
+.stat-label{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:2px;
+}
+
+/* GRID FEATURES */
+.grid{
+  margin-top:40px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+.card{
+  background:var(--card);
+  border-radius:16px;
+  padding:18px;
+  box-shadow:var(--shadow);
+  border:1px solid var(--line);
+}
+.card h3{
+  color:var(--green-700);
+  font-size:20px;
+  margin-bottom:6px;
+}
+.card p{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.5;
+  margin-bottom:12px;
+}
+.btn{
+  padding:8px 14px;
+  background:var(--green-600);
+  color:white;
+  font-weight:600;
+  border-radius:10px;
+  text-decoration:none;
+  font-size:14px;
+  display:inline-block;
+}
+
+@media(max-width:600px){
+  .grid{grid-template-columns:1fr;}
+  .stats{flex-direction:column; gap:14px;}
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="brand">NutriFit</div>
+  <div class="subtitle">Tổng quan sức khoẻ hôm nay</div>
+</header>
+
+<div class="main">
+
+  <!-- PROGRESS RING -->
+  <div class="ring-box">
+    <svg>
+      <circle class="track" cx="130" cy="130" r="100" fill="none"/>
+      <circle class="progress" cx="130" cy="130" r="100" fill="none"/>
+    </svg>
+
+    <div class="center-text">
+      <div class="percent" id="percentNum">0%</div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-value" id="calories">0</div>
+      <div class="stat-label">Calo tiêu thụ</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="steps">0</div>
+      <div class="stat-label">Bước chân</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="minutes">0</div>
+      <div class="stat-label">Phút tập</div>
+    </div>
+  </div>
+
+  <!-- FEATURE CARDS -->
+  <div class="grid">
+    <div class="card">
+      <h3>Dinh dưỡng</h3>
+      <p>Thực đơn cá nhân hoá theo mục tiêu sức khoẻ.</p>
+      <a class="btn" href="nutrition.html">Xem thêm</a>
+    </div>
+
+    <div class="card">
+      <h3>Tập luyện</h3>
+      <p>Chương trình luyện tập phù hợp thể trạng.</p>
+      <a class="btn" href="workout.html">Xem thêm</a>
+    </div>
+
+    <div class="card">
+      <h3>Lịch khám</h3>
+      <p>Quản lý và theo dõi lịch khám sức khoẻ.</p>
+      <a class="btn" href="my-appointments.html">Xem thêm</a>
+    </div>
+
+    <div class="card">
+      <h3>Tiến trình</h3>
+      <p>Theo dõi cải thiện sức khoẻ qua từng ngày.</p>
+      <a class="btn" href="progress.html">Xem thêm</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Progress ring animation
+const ring = document.querySelector(".progress");
+const radius = 100;
+const circumference = 2 * Math.PI * radius;
+ring.style.strokeDasharray = circumference;
+ring.style.strokeDashoffset = circumference;
+
+const targetPercent = 82; // % hoàn thành
+
+setTimeout(() => {
+  const offset = circumference - (targetPercent / 100) * circumference;
+  ring.style.strokeDashoffset = offset;
+}, 300);
+
+// Animate % number
+let p = 0;
+const pEl = document.getElementById("percentNum");
+const pInterval = setInterval(() => {
+  p++;
+  pEl.textContent = p + "%";
+  if (p >= targetPercent) clearInterval(pInterval);
+}, 20);
+
+// Stats counter
+function counter(id, target, speed){
+  let val = 0;
+  const el = document.getElementById(id);
+  const t = setInterval(() => {
+    val++;
+    el.textContent = val.toLocaleString();
+    if(val >= target) clearInterval(t);
+  }, speed);
+}
+
+counter("calories", 1800, 1);
+counter("steps", 9500, 1);
+counter("minutes", 60, 25);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NutriFit – Tiến trình sức khỏe</title>
+<style>
+  :root {
+    --bg: #eefdf4;
+    --card: #fff;
+    --accent: #2e7d32;
+    --line: #d9e7db;
+    --text: #0f1f16;
+    --muted: #677a61;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: "Inter", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 20px;
+  }
+  .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  header h1 {
+    color: var(--accent);
+    margin-bottom: 5px;
+  }
+  header p {
+    margin-top: 0;
+    color: var(--muted);
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--text);
+    margin-right: 20px;
+    font-weight: 600;
+  }
+  nav a.active {
+    color: var(--accent);
+  }
+  h2.section {
+    color: var(--accent);
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgb(46 125 50 / 0.1);
+  }
+  .card strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  .card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* Chart container */
+  #weightChart {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgb(46 125 50 / 0.1);
+    margin-top: 30px;
+  }
+
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>NutriFit</h1>
+      <p>Tổng quan sức khoẻ hằng ngày</p>
+      <nav>
+        <a href="index.html">Trang chủ</a>
+        <a href="calendar.html">Lịch khám</a>
+        <a href="my-appointments.html">Lịch tháng</a>
+        <a href="book.html">Đặt lịch</a>
+        <a href="progress.html" class="active">Tiến trình</a>
+      </nav>
+    </header>
+
+    <h2 class="section">Theo dõi Tiến trình sức khoẻ</h2>
+
+    <div class="card">
+      <strong>Cân nặng hiện tại</strong>
+      <p>Lần ghi gần nhất: 66.2 kg</p>
+    </div>
+
+    <div class="card">
+      <strong>Mục tiêu</strong>
+      <p>Đặt mục tiêu cân nặng: 63 kg</p>
+    </div>
+
+    <div class="card">
+      <strong>Thay đổi 7 ngày</strong>
+      <p>Xu hướng gần đây: -1.8 kg</p>
+    </div>
+
+    <div id="weightChart">
+      <canvas id="chartCanvas" width="800" height="400"></canvas>
+    </div>
+  </div>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById("chartCanvas").getContext("2d");
+
+    // Dữ liệu mẫu cân nặng theo ngày
+    const labels = [
+      "01/11", "02/11", "03/11", "04/11", "05/11", "06/11", "07/11"
+    ];
+
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: "Cân nặng (kg)",
+        data: [68.0, 67.5, 67.1, 66.8, 66.5, 66.3, 66.2],
+        fill: false,
+        borderColor: "#2e7d32",
+        backgroundColor: "#2e7d32",
+        tension: 0.3,
+        pointRadius: 5,
+        pointHoverRadius: 7,
+      }]
+    };
+
+    const config = {
+      type: "line",
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "top",
+            labels: {
+              color: "#2e7d32",
+              font: {weight: "bold", size: 14}
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            min: 65,
+            max: 70,
+            ticks: {
+              stepSize: 0.5,
+              color: "#2e7d32"
+            }
+          },
+          x: {
+            ticks: {
+              color: "#2e7d32"
+            }
+          }
+        }
+      }
+    };
+
+    const weightChart = new Chart(ctx, config);
+  </script>
+</body>
+</html>

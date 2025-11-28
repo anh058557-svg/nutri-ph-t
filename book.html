@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đặt lịch khám · NutriFit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Nút quay lại -->
+    <div class="back-btn" onclick="history.back()">← Quay lại</div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">NutriFit · Đặt Lịch</div>
+      <nav class="nav">
+        <a href="my-appointments.html">Danh sách</a>
+        <a href="book.html" class="active">Đặt lịch</a>
+        <a href="calendar.html">Lịch tháng</a>
+      </nav>
+    </header>
+
+    <!-- Grid chính -->
+    <div class="grid grid-2">
+
+      <!-- Form đặt lịch -->
+      <div class="card">
+        <div class="section-title">Thông tin lịch khám</div>
+
+        <label class="label">Ngày khám</label>
+        <input id="date" type="date" class="input"/>
+
+        <label class="label">Giờ khám</label>
+        <input id="time" type="time" class="input"/>
+
+        <label class="label">Loại khám</label>
+        <select id="type" class="input">
+          <option value="Tổng quát">Tổng quát</option>
+          <option value="Dinh dưỡng">Dinh dưỡng</option>
+          <option value="Tim mạch">Tim mạch</option>
+          <option value="Mắt">Mắt</option>
+          <option value="Răng hàm mặt">Răng hàm mặt</option>
+        </select>
+
+        <label class="label">Bác sĩ/Phòng khám</label>
+        <input id="provider" class="input" placeholder="VD: BS. Lan – Phòng khám ABC">
+
+        <label class="label">Ghi chú</label>
+        <textarea id="note" class="input" rows="3" placeholder="VD: mang kết quả xét nghiệm, BHYT..."></textarea>
+
+        <div class="btn-row">
+          <button class="btn primary" id="save">Lưu lịch</button>
+          <button class="btn outline" id="aiSuggest">Gợi ý (AI)</button>
+        </div>
+
+        <p class="notice" id="aiMsg" style="display:none"></p>
+      </div>
+
+      <!-- Gợi ý nhanh -->
+      <div class="card">
+        <div class="section-title">Gợi ý nhanh</div>
+        <ul class="tips">
+          <li>Bận buổi sáng → gợi ý 17:00 – 19:00</li>
+          <li>Cần nhịn ăn → gợi ý 07:30 – 09:00</li>
+          <li>Khám dinh dưỡng → cách bữa chính 2–3 giờ</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <footer class="footer">© NutriFit – Your Health, Simplified.</footer>
+  </div>
+
+  <!-- JAVASCRIPT GỐC (giữ nguyên logic) -->
+  <script>
+    const LS_KEY = "nutrifit_appointments_v1";
+
+    function loadAppointments(){ 
+      try { return JSON.parse(localStorage.getItem(LS_KEY)) || [] }
+      catch(e){ return [] }
+    }
+
+    function saveAppointments(list){
+      localStorage.setItem(LS_KEY, JSON.stringify(list));
+    }
+
+    function uid(){
+      return Math.random().toString(36).slice(2,10);
+    }
+
+    function toYMD(d){
+      const y=d.getFullYear();
+      const m=String(d.getMonth()+1).padStart(2,'0');
+      const day=String(d.getDate()).padStart(2,'0');
+      return `${y}-${m}-${day}`;
+    }
+
+    (function init(){
+      const d=document.getElementById('date');
+      const t=document.getElementById('time');
+      const now=new Date();
+      d.value = toYMD(now);
+
+      let mins = now.getMinutes();
+      const rounded = new Date(now.getFullYear(),now.getMonth(),now.getDate(),
+                               now.getHours(), mins<30?30:0);
+      t.value = String(rounded.getHours()).padStart(2,'0') + ':' +
+                String(rounded.getMinutes()).padStart(2,'0');
+    })();
+
+    document.getElementById('save').onclick = () => {
+      const appt = {
+        id: uid(),
+        date: date.value,
+        time: time.value,
+        type: type.value,
+        provider: provider.value || 'Chưa xác định',
+        note: note.value,
+        status: 'scheduled'
+      };
+      
+      if(!appt.date || !appt.time){
+        alert('Vui lòng chọn ngày/giờ!');
+        return;
+      }
+
+      const list = loadAppointments();
+      list.push(appt);
+      saveAppointments(list);
+
+      alert('✅ Đã lưu lịch khám!');
+      location.href = 'my-appointments.html';
+    };
+
+    document.getElementById('aiSuggest').onclick = () => {
+      const typeVal = type.value;
+      const msgEl = document.getElementById('aiMsg');
+      let s = '';
+
+      if(typeVal === 'Dinh dưỡng')
+        s = 'Nên khám cách bữa ăn chính ít nhất 2–3 giờ. Gợi ý 09:30 hoặc 15:30.';
+      else if(typeVal === 'Tổng quát')
+        s = 'Nếu cần xét nghiệm máu nhịn ăn, đặt khung 07:30–09:00.';
+      else
+        s = 'Khung giờ 17:00–19:00 phù hợp sau giờ học/làm.';
+
+      msgEl.textContent = '🤖 Gợi ý AI: ' + s;
+      msgEl.style.display = 'block';
+    };
+  </script>
+
+</body>
+</html>

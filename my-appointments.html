@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh sách lịch khám · NutriFit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Nút quay lại -->
+    <div class="back-btn" onclick="history.back()">← Quay lại</div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">NutriFit · Lịch đã đặt</div>
+      <nav class="nav">
+        <a href="my-appointments.html" class="active">Danh sách</a>
+        <a href="book.html">Đặt lịch</a>
+        <a href="calendar.html">Lịch tháng</a>
+      </nav>
+    </header>
+
+    <!-- Danh sách -->
+    <div id="list" class="appt-list"></div>
+
+    <footer class="footer">© NutriFit – Your Health, Simplified.</footer>
+  </div>
+
+<script>
+const LS_KEY = "nutrifit_appointments_v1";
+
+function loadAppointments(){
+  try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; }
+  catch(e){ return []; }
+}
+
+function saveAppointments(list){
+  localStorage.setItem(LS_KEY, JSON.stringify(list));
+}
+
+function removeAppointment(id){
+  if(!confirm("Bạn chắc chắn muốn xóa lịch khám này?")) return;
+  let list = loadAppointments().filter(x => x.id !== id);
+  saveAppointments(list);
+  render();
+}
+
+function formatDate(d){
+  const [y,m,day] = d.split("-");
+  return `${day}/${m}/${y}`;
+}
+
+function formatTime(hm){
+  const [h,m] = hm.split(":").map(Number);
+  const suf = h >= 12 ? "PM" : "AM";
+  const hh = ((h + 11) % 12) + 1;
+  return `${String(hh).padStart(2,"0")}:${String(m).padStart(2,"0")} ${suf}`;
+}
+
+function render(){
+  const wrap = document.getElementById("list");
+  const data = loadAppointments();
+
+  if(data.length === 0){
+    wrap.innerHTML = `
+      <div class="empty">
+        <img src="https://cdn-icons-png.flaticon.com/512/4076/4076500.png" class="empty-img"/>
+        <p>Bạn chưa có lịch khám nào.</p>
+        <a class="btn primary" href="book.html">Đặt lịch ngay</a>
+      </div>`;
+    return;
+  }
+
+  wrap.innerHTML = data.map(item => `
+    <div class="appt-card">
+      <div class="appt-info">
+        <div class="appt-date">
+          <div class="date-main">${formatDate(item.date)}</div>
+          <div class="time">${formatTime(item.time)}</div>
+        </div>
+
+        <div class="appt-detail">
+          <div class="type">${item.type}</div>
+          <div class="provider">👨‍⚕️ ${item.provider}</div>
+          ${item.note ? `<div class="note">📝 ${item.note}</div>` : ""}
+        </div>
+      </div>
+
+      <div class="appt-actions">
+        <button class="btn outline" onclick="removeAppointment('${item.id}')">Xóa</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+render();
+</script>
+
+</body>
+</html>

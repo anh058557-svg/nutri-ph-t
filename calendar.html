@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lịch tháng · NutriFit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- BACK BUTTON -->
+    <div class="back-btn" onclick="history.back()">← Quay lại</div>
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="brand">NutriFit · Lịch tháng</div>
+      <nav class="nav">
+        <a href="my-appointments.html">Danh sách</a>
+        <a href="book.html">Đặt lịch</a>
+        <a href="calendar.html" class="active">Lịch tháng</a>
+      </nav>
+    </header>
+
+    <!-- CALENDAR WRAPPER -->
+    <div class="calendar-card">
+      <div class="calendar-header">
+        <button id="prev" class="cal-btn">‹</button>
+        <div id="monthYear" class="month-title"></div>
+        <button id="next" class="cal-btn">›</button>
+      </div>
+
+      <div class="calendar-grid" id="calendar"></div>
+    </div>
+
+    <footer class="footer">© NutriFit – Your Health, Simplified.</footer>
+  </div>
+
+<script>
+const monthYearEl = document.getElementById("monthYear");
+const calendarEl = document.getElementById("calendar");
+
+let current = new Date();
+
+function renderCalendar() {
+  const year = current.getFullYear();
+  const month = current.getMonth();
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const lastDate = new Date(year, month + 1, 0).getDate();
+
+  const monthNames = ["Tháng 1","Tháng 2","Tháng 3","Tháng 4","Tháng 5","Tháng 6",
+                      "Tháng 7","Tháng 8","Tháng 9","Tháng 10","Tháng 11","Tháng 12"];
+
+  monthYearEl.textContent = `${monthNames[month]} ${year}`;
+
+  calendarEl.innerHTML = `
+    <div class="dow">T2</div>
+    <div class="dow">T3</div>
+    <div class="dow">T4</div>
+    <div class="dow">T5</div>
+    <div class="dow">T6</div>
+    <div class="dow">T7</div>
+    <div class="dow">CN</div>
+  `;
+
+  let blanks = (firstDay + 6) % 7; // Convert Sunday=0 → last
+  for (let i = 0; i < blanks; i++) {
+    calendarEl.innerHTML += `<div class="day empty"></div>`;
+  }
+
+  const today = new Date();
+  const todayYMD = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+
+  for (let d = 1; d <= lastDate; d++) {
+    const isToday = todayYMD === `${year}-${month}-${d}`;
+
+    calendarEl.innerHTML += `
+      <div class="day ${isToday ? "today" : ""}">
+        ${d}
+      </div>`;
+  }
+}
+
+document.getElementById("prev").onclick = () => {
+  current.setMonth(current.getMonth() - 1);
+  renderCalendar();
+};
+
+document.getElementById("next").onclick = () => {
+  current.setMonth(current.getMonth() + 1);
+  renderCalendar();
+};
+
+renderCalendar();
+</script>
+
+</body>
+</html>

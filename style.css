@@ -1,0 +1,499 @@
+/* ============================================================
+   NUTRIFIT — PREMIUM HEALTH APP UI (Pastel Green Edition)
+   ============================================================ */
+
+/* ---- ROOT COLORS ---- */
+:root {
+  --green: #9adeb5;
+  --green-soft: #eaf8f1;
+  --green-dark: #5fa87a;
+  --green-deep: #3c7a58;
+
+  --text-main: #2d3b38;
+  --text-light: #647b76;
+
+  --white: #ffffff;
+  --radius: 16px;
+  --shadow: 0 8px 28px rgba(0, 0, 0, 0.05);
+
+  font-family: "Nunito", "Inter", sans-serif;
+}
+
+/* ---- GLOBAL ---- */
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--green-soft);
+  color: var(--text-main);
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.container {
+  max-width: 1080px;
+  margin: auto;
+  padding: 28px 18px;
+}
+
+/* ---- BEAUTIFUL BACK BUTTON ---- */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: var(--white);
+  border-radius: 12px;
+  color: var(--green-dark);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: 0.25s ease;
+  user-select: none;
+}
+
+.back-btn:hover {
+  background: var(--green);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+/* ---- HEADER ---- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 26px 0;
+}
+
+.brand {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--green-deep);
+  letter-spacing: -0.5px;
+}
+
+/* ---- NAVIGATION ---- */
+.nav a {
+  text-decoration: none;
+  margin-left: 20px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: 0.25s;
+}
+
+.nav a:hover,
+.nav a.active {
+  background: var(--green);
+  color: var(--white);
+}
+
+/* ---- CARD ---- */
+.card {
+  background: var(--white);
+  padding: 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* ---- SECTION TITLE ---- */
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--green-deep);
+}
+
+/* ---- LABEL ---- */
+.label {
+  margin: 14px 0 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+/* ---- INPUT + SELECT + TEXTAREA ---- */
+.input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid #d4e6dd;
+  background: #f9fffc;
+  font-size: 15px;
+  transition: 0.25s;
+}
+
+.input:focus {
+  border-color: var(--green-dark);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(159, 222, 180, 0.35);
+}
+
+/* ---- GRID ---- */
+.grid {
+  display: grid;
+  gap: 24px;
+}
+
+.grid-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 820px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- BUTTONS ---- */
+.btn-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.btn {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 14px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.25s;
+}
+
+.btn.primary {
+  background: var(--green-dark);
+  color: white;
+}
+
+.btn.primary:hover {
+  background: var(--green-deep);
+  transform: translateY(-2px);
+}
+
+.btn.outline {
+  background: white;
+  border: 2px solid var(--green-dark);
+  color: var(--green-dark);
+}
+
+.btn.outline:hover {
+  background: var(--green);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* ---- TIPS ---- */
+.tips li {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: var(--text-light);
+}
+
+/* ---- FOOTER ---- */
+.footer {
+  margin-top: 35px;
+  text-align: center;
+  color: var(--text-light);
+  font-size: 14px;
+}
+/* ---- LIST EMPTY STATE ---- */
+.empty {
+  text-align: center;
+  background: white;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.empty-img {
+  width: 110px;
+  opacity: 0.8;
+  margin-bottom: 14px;
+}
+
+/* ---- APPOINTMENT CARD ---- */
+.appt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.appt-card {
+  background: white;
+  padding: 22px;
+  border-radius: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  box-shadow: var(--shadow);
+  transition: 0.25s;
+}
+
+.appt-card:hover {
+  transform: translateY(-2px);
+}
+
+/* LEFT INFO */
+.appt-info {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.appt-date {
+  background: var(--green);
+  color: white;
+  padding: 14px 16px;
+  border-radius: 14px;
+  text-align: center;
+  min-width: 90px;
+}
+
+.date-main {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.time {
+  font-size: 14px;
+  margin-top: 4px;
+  opacity: 0.9;
+}
+
+/* RIGHT INFO */
+.appt-detail .type {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--green-deep);
+}
+
+.provider, .note {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-top: 6px;
+}
+
+/* ACTIONS */
+.appt-actions {
+  display: flex;
+  align-items: center;
+}
+
+.appt-actions .btn {
+  width: 90px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 12px;
+}
+
+.nav {
+  display: flex;
+  gap: 12px;
+  white-space: nowrap;
+}
+/* ==== CALENDAR CARD ==== */
+.calendar-card {
+  background: white;
+  padding: 24px;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  margin-top: 20px;
+}
+
+/* ==== HEADER ==== */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.month-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+
+.cal-btn {
+  background: var(--green);
+  border: none;
+  color: white;
+  font-size: 20px;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.cal-btn:hover {
+  background: var(--green-dark);
+}
+
+/* ==== GRID ==== */
+.calendar-grid {
+  margin-top: 22px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.dow {
+  text-align: center;
+  font-weight: 700;
+  color: var(--green-deep);
+  padding-bottom: 8px;
+}
+
+.day {
+  background: var(--green-soft);
+  text-align: center;
+  padding: 14px 0;
+  border-radius: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: 0.25s;
+}
+.day:hover {
+  background: var(--green);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.day.today {
+  background: var(--green-dark);
+  color: white;
+}
+
+.day.empty {
+  background: transparent;
+  box-shadow: none;
+}
+/* Vòng tiến độ có animation */
+.ring{
+  width:320px; height:320px;
+  border-radius:50%;
+  position:relative;
+  display:flex; align-items:center; justify-content:center;
+  background:conic-gradient(var(--green-dark) 0%, var(--green-light) 0%);
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
+  transition:background 1s ease;
+}
+
+/* Lỗ bên trong */
+.ring::before{
+  content:"";
+  position:absolute;
+  inset:26px;
+  background:white;
+  border-radius:50%;
+  box-shadow:inset 0 0 0 2px var(--green-light);
+}
+
+/* Nút chỉ tiến độ */
+.notch{
+  width:16px;height:16px;
+  background:var(--green-dark);
+  border-radius:50%;
+  position:absolute;
+  top:-10px; left:50%;
+  transform:translateX(-50%);
+  box-shadow:0 0 0 8px var(--green-light);
+  opacity:0;
+  animation:fadeIn .5s ease forwards 1.2s;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+/* --- REPLACE / ADD THESE RULES --- */
+
+/* ensure ring wrapper preserves stacking context */
+.nf-ring{
+  width:260px;
+  height:260px;
+  display:grid;
+  place-items:center;
+  position:relative;
+  /* keep existing visual styles (if you had them) */
+  /* background & box-shadow handled in main CSS */
+}
+
+/* CENTER CIRCLE: use flex column so percent and label stack and center perfectly */
+.nf-ring .nf-center{
+  position:absolute;
+  width:170px;
+  height:170px;
+  border-radius:50%;
+  background:var(--nf-card);
+  display:flex;
+  flex-direction:column;      /* stack percent above label */
+  align-items:center;         /* horizontal centering */
+  justify-content:center;     /* vertical centering */
+  gap:6px;
+  z-index:2;                  /* ensure sits above svg strokes */
+  box-shadow:0 8px 18px rgba(15,35,30,0.06);
+  text-align:center;
+  padding:8px 10px;
+}
+
+/* Percent number */
+.nf-ring .nf-center .nf-percent{
+  font-size:44px;
+  font-weight:800;
+  color:var(--nf-green-600);
+  line-height:1;
+  margin:0;
+  transform:translateY(-2px); /* tiny optical nudge */
+}
+
+/* Label under percent */
+.nf-ring .nf-center .nf-label{
+  font-size:13px;
+  color:var(--nf-muted);
+  margin:0;
+  opacity:0.95;
+  letter-spacing:0.1px;
+  white-space:normal;
+}
+
+/* Responsive tweak: reduce sizes on small screens */
+@media (max-width:420px){
+  .nf-ring{ width:220px; height:220px; }
+  .nf-ring .nf-center{ width:140px; height:140px; }
+  .nf-ring .nf-center .nf-percent{ font-size:34px; }
+  .nf-ring .nf-center .nf-label{ font-size:12px; }
+}
+:root{
+  --bg:#eefdf4; /* nền pastel xanh lá */
+  --card:#ffffff;
+  --accent:#26a165;
+  --line:#d9e8dd;
+  --text:#0f1f17;
+  --muted:#678579;
+}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui;
+}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px;
+}
